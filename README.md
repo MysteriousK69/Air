@@ -1,0 +1,2 @@
+# yes
+An economy bot.
