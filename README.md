@@ -1,2 +1,2 @@
-# yes
-An economy bot.
+# No
+Its not An economy bot.
