@@ -1,0 +1,25 @@
+{
+  "name": "air",
+  "version": "1.0.0",
+  "description": "An economy bot.",
+  "main": "./src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Proxy-Productions/air.git"
+  },
+  "author": "Proxy Productions",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Proxy-Productions/air/issues"
+  },
+  "homepage": "https://github.com/Proxy-Productions/air#readme",
+  "dependencies": {
+    "discord.js": "^12.3.1",
+    "dotenv": "^8.2.0",
+    "mongoose": "^5.10.3",
+    "pretty-ms": "^7.0.0"
+  }
+}
