@@ -8,7 +8,7 @@ const EconomySchema = new mongoose.Schema({
     work: {
         job: { type: String, default: 'none' },
         moneyEarned: { type: String, default: 0 },
-        cooldown: { type: Date, default: new Date() }
+        cooldown: { type: Date, default: new Date(Date.now() - 3.6e+6) }
     },
     items: { type: Array, required: false },
     dailyStreak: { type: Date, required: false, default: new Date(Date.now() - 86400000) }
