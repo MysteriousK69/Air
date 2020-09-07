@@ -1,2 +1,2 @@
-# No
-Its not An economy bot.
+# Air
+It's an economy bot lmao

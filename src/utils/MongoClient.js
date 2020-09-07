@@ -10,6 +10,7 @@ class MongoClient extends Client {
             useNewUrlParser: true,
             useUnifiedTopology: true
         });
+        this.economy = economy;
     }
 
     /**
@@ -18,11 +19,12 @@ class MongoClient extends Client {
      */
 
     async fetchUser(userId) {
+        const someone = this.users.cache.get(userId);
+        if (!someone || someone.bot) return false;
         const user = await economy.findOne({ userId: userId });
         if (!user) {
             const newUser = new economy({
                 userId: userId,
-                job: 'none',
                 items: []
             });
             newUser.save();
@@ -38,11 +40,12 @@ class MongoClient extends Client {
      */
 
     async giveBankSpace(userId, amount) {
+        const someone = this.users.cache.get(userId);
+        if (!someone || someone.bot) return false;
         let user = await economy.findOne({ userId: userId });
         if (!user) {
             const newUser = new economy({
                 userId: userId,
-                job: 'none',
                 items: []
             });
             newUser.save();
@@ -59,15 +62,40 @@ class MongoClient extends Client {
      */
 
     async createUser(userId) {
+        const someone = this.users.cache.get(userId);
+        if (!someone || someone.bot) return false;
         const user = await economy.findOne({ userId: userId });
         if (!user) return false;
         const newUser = new economy({
             userId: userId,
-            job: 'none',
             items: []
         });
         newUser.save();
         return newUser;
+    }
+
+    /**
+     * 
+     * @param {string} userId - A discord user ID.
+     * @param {number} amount - Amount of coins to give.
+     */
+
+    async giveCoins(userId, amount) {
+        const someone = this.users.cache.get(userId);
+        if (!someone || someone.bot) return false;
+        let user = await economy.findOne({ userId: userId });
+        if (!user) {
+            const newUser = new economy({
+                userId: userId,
+                items: [],
+                coinsInWallet: parseInt(amount)
+            });
+            newUser.save();
+            return newUser;
+        }
+        user.coinsInWallet += parseInt(amount);
+        await user.save();
+        return user;
     }
 }
 

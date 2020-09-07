@@ -50,14 +50,13 @@ module.exports = async (bot, message) => {
                     .setColor('RED');
                     return message.channel.send(noUserPerms)
                 }
-                command.run(bot, message, args);
-                bot.giveBankSpace(message.author.id, command.config.bankSpace); 
+                if (command.config.bankSpace !== 0) {
+                    bot.giveBankSpace(message.author.id, command.config.bankSpace);
+                }
+                await command.run(bot, message, args);
                 timestamps.set(message.author.id, now);
                 setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
             }
         }
-    }
-    else {
-        await bot.fetchUser(message.author.id);
     }
 }
