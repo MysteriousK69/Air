@@ -3,7 +3,7 @@ module.exports.run = async (bot, message, args) => {
 
     if (args.join(' ') === 'all') {
         if (data.coinsInWallet > data.bankSpace) {
-            data.coinsInWallet = (data.coinsInWallet - (data.bankSpace - data.coinsInBank));
+            data.coinsInWallet -= (data.coinsInWallet - data.bankSpace);
 
             await message.channel.send(`Deposited **${(data.bankSpace - data.coinsInBank)}** coins.`);
 
