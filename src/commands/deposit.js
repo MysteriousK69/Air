@@ -27,6 +27,9 @@ module.exports.run = async (bot, message, args) => {
         if (parseInt(args[0]) > data.bankSpace) {
             return message.channel.send('Your bank is not big enough.');
         }
+        if (parseInt(args[0]) > data.coinsInWallet) {
+            return message.channel.send("You don't have that much money.");
+        }
 
         data.coinsInBank += parseInt(args[0]);
 
