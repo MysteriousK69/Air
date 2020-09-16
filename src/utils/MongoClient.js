@@ -2,6 +2,7 @@ require('dotenv').config();
 const { Client } = require('discord.js');
 const mongoose = require('mongoose');
 const economy = require('../models/EconomyModel');
+const ItemManager = require('./ItemManager');
 
 class MongoClient extends Client {
     constructor() {
@@ -11,6 +12,7 @@ class MongoClient extends Client {
             useUnifiedTopology: true
         });
         this.economy = economy;
+        this.items = new ItemManager();
     }
 
     /**
