@@ -10,7 +10,7 @@ const EconomySchema = new mongoose.Schema({
         moneyEarned: { type: String, default: 0 },
         cooldown: { type: Date, default: new Date(Date.now() - 3600000) },
     },
-    items: { type: Array, required: false },
+    items: { type: Array, required: false, default: [] },
     dailyStreak: { type: Date, required: false, default: new Date(Date.now() - 86400000) }
 });
 

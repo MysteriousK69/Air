@@ -13,7 +13,7 @@ const array = [{
             'The brownie tasted great.'
         ];
         const yes = brownieRandom[Math.floor(Math.random() * brownieRandom.length)];
-        message.channel.send(`${brownieRandom}`);
+        message.channel.send(`${yes}`);
     }
 }];
 
