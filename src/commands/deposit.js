@@ -1,6 +1,5 @@
 module.exports.run = async (bot, message, args) => {
     let data = await bot.fetchUser(message.author.id);
-    return message.channel.send(`${data.bankSpace - data.coinsInBank}`);
 
     if (args.join(' ') === 'all') {
         if (data.coinsInWallet > data.bankSpace) {
@@ -8,7 +7,7 @@ module.exports.run = async (bot, message, args) => {
 
             data.coinsInWallet = max_deposit;
 
-            await message.channel.send(`Deposited **${(data.bankSpace - data.coinsInBank)}** coins.`);
+            await message.channel.send(`Deposited **${data.bankSpace - data.coinsInBank}** coins.`);
 
             data.coinsInBank = ((data.coinsInWallet + data.bankSpace) - max_deposit);
 
