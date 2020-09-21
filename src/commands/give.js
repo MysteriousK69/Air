@@ -26,7 +26,7 @@ module.exports.run = async (bot, message, args) => {
 
         userData.save();
 
-        message.channel.send(`You gave ${member} **${parseInt(toGive).toLocaleString}** coins`); //Change the message how u like
+        message.channel.send(`You gave ${member} **${parseInt(toGive).toLocaleString()}** coins`); //Change the message how u like
     } else {
         const toGive = args[1];
 
@@ -40,7 +40,7 @@ module.exports.run = async (bot, message, args) => {
 
         await userData.save();
 
-        message.channel.send(`You gave ${member} **${parseInt(toGive).toLocaleString}** coins`); //Change the message how u like
+        message.channel.send(`You gave ${member} **${parseInt(toGive).toLocaleString()}** coins`); //Change the message how u like
     }
 
 }
