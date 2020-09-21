@@ -1,13 +1,21 @@
 module.exports.run = async (bot, message, args) => {
+
     const member = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(member => member.user.username === args.slice(0).join(' ') || member.user.username === args[0]);
+
+    if (!member || !args[0]) {
+        return message.channel.send(`Who are you giving the coins to?`);
+    }
+
     const userData = await bot.fetchUser(member.user.id);
     const authorData = await bot.fetchUser(message.author.id);
 
-    if (!member) return message.channel.send(`Who are you giving the coins to?`);
+    if (!args[1]) {
+        return message.channel.send(`How much coins are you giving them?`);
+    }
 
-    if (!args[1]) return message.channel.send(`How much coins are you giving them?`);
-
-    if (isNaN(args[1]) && args[1] !== 'all') return message.channel.send(`Thats not a valid option`)
+    if (isNaN(args[1]) && args[1] !== 'all') {
+        return message.channel.send(`Thats not a valid option`)
+    }
  
     if (args[1] == 'all') {
         const toGive = authorData.coinsInWallet;
