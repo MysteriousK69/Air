@@ -1,6 +1,6 @@
 module.exports.run = async (bot, message, args) => {
     let data = await bot.fetchUser(message.author.id);
-    return console.log(data.bankSpace - data.coinsInBank);
+    return message.channel.send(`${data.bankSpace - data.coinsInBank}`);
 
     if (args.join(' ') === 'all') {
         if (data.coinsInWallet > data.bankSpace) {
