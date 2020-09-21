@@ -5,17 +5,15 @@ module.exports.run = async (bot, message, args) => {
     if (!member || !args[0]) {
         return message.channel.send(`Who are you giving the coins to?`);
     }
-
-    const userData = await bot.fetchUser(member.user.id);
-    const authorData = await bot.fetchUser(message.author.id);
-
     if (!args[1]) {
         return message.channel.send(`How much coins are you giving them?`);
     }
 
-    if (isNaN(args[1]) && args[1] !== 'all') {
+    if (isNaN(args[1]) && args[1] != 'all') {
         return message.channel.send(`Thats not a valid option`)
     }
+    const userData = await bot.fetchUser(member.user.id);
+    const authorData = await bot.fetchUser(message.author.id);
  
     if (args[1] == 'all') {
         const toGive = authorData.coinsInWallet;
