@@ -3,11 +3,13 @@ module.exports.run = async (bot, message, args) => {
 
     if (args.join(' ') === 'all') {
         if (data.coinsInWallet > data.bankSpace) {
-            data.coinsInWallet = (data.coinsInWallet - data.bankSpace);
+            const max_deposit = (data.coinsInWallet+data.coinsInBank-data.bankSpace);
+
+            data.coinsInWallet = max_deposit;
 
             await message.channel.send(`Deposited **${(data.bankSpace - data.coinsInBank)}** coins.`);
 
-            data.coinsInBank += (data.bankSpace - data.coinsInBank);
+            data.coinsInBank = ((data.coinsInWallet + data.bankSpace) - max_deposit);
 
             await data.save();
         } else {
