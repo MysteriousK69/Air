@@ -15,6 +15,18 @@ const array = [{
         const yes = brownieRandom[Math.floor(Math.random() * brownieRandom.length)];
         message.channel.send(`${yes}`);
     }
+}, 
+{
+    name: 'Wallet Lock',
+    description: 'Secure your wallet from those sneaky robbers',
+    canUse: false,
+    canBuy: true,
+    displayOnShop: true,
+    sellAmount: 2000,
+    price: 5000,
+    run: async(bot, message, args) => {
+
+    }
 }];
 
 module.exports = array;
