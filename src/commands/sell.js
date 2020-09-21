@@ -4,7 +4,7 @@ const { MessageEmbed } = require('discord.js');
 module.exports.run = async (bot, message, args) => {
     let user = await bot.fetchUser(message.author.id);
     if (!args.join(' ')) {
-        return message.channel.send("you can't use nothing lmao");
+        return message.channel.send("you can't sell nothing lmao");
     }
     const item = itemss.find(x => x.name.toLowerCase() === args.join(' ').toString().toLowerCase());
     if (!item) {
