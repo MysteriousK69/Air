@@ -13,11 +13,9 @@ module.exports.run = async (bot, message, args) => {
 
             await data.save();
         } else {
-            data.coinsInBank += (data.bankSpace - data.coinsInBank);
-
             await message.channel.send(`Deposited **${data.bankSpace - data.coinsInBank}** coins.`);
-
             data.coinsInWallet -= (data.bankSpace - data.coinsInBank);
+            data.coinsInBank += (data.bankSpace - data.coinsInBank);
 
             await data.save();
         }
