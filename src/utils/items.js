@@ -40,7 +40,7 @@ const array = [{
     price: 10000,
     keep: true,
     run: async (bot, message, args) => {
-        const logsAmount = Math.floor(Math.random() * 1)+1;
+        const logsAmount = Math.round(Math.random() * 1)+1;
         const data = await bot.fetchUser(message.author.id);
         message.channel.send(`You swing your axe and chopped **${logsAmount}** logs`);
         const findItem = data.items.find(i => i.name.toLowerCase() == 'log');

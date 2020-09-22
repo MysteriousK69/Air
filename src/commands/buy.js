@@ -5,11 +5,12 @@ module.exports.run = async (bot, message, args) => {
     if (!args.join(' ')) {
         return message.channel.send("you can't buy nothing lmao");
     }
-    const item = itemss.find(x => x.name.toLowerCase() === args.join(' ').toString().toLowerCase() || x.name.toLowerCase() === args[0].toString().toLowerCase() || x.name.toLowerCase() === `${args[0].toLowerCase()} ${args[1].toLowerCase()}`);
+    if (!args[1]) args[1] = '';
+    const item = itemss.find(x => x.name.toLowerCase() === args.join(' ').toString().toLowerCase() || x.name.toLowerCase() === args[0].toString().toLowerCase() || x.name.toLowerCase() === `${args[0].toString().toLowerCase()} ${args[1].toString().toLowerCase()}`);
     if (!item) {
         return message.channel.send("You can't buy an item that doesn't exist");
     }
-    if (!item.canBuy) {
+    if (item.canBuy == false) {
         return message.channel.send(":thinking: You can't buy this item");
     }
     let buyAmount = args.join(' ').toString().match(/([1-9][0-9]*)/)
