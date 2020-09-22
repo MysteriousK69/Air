@@ -5,14 +5,17 @@ module.exports.run = async (bot, message, args) => {
     if (!args.join(' ')) {
         return message.channel.send("you can't buy nothing lmao");
     }
-    const item = itemss.find(x => x.name.toLowerCase() === args.join(' ').toString().toLowerCase());
+    const item = itemss.find(x => x.name.toLowerCase() === args.join(' ').toString().toLowerCase() || x.name.toLowerCase() === args[0].toString().toLowerCase() || x.name.toLowerCase() === `${args[0].toLowerCase()} ${args[1].toLowerCase()}`);
     if (!item) {
         return message.channel.send("You can't buy an item that doesn't exist");
     }
     if (!item.canBuy) {
         return message.channel.send(":thinking: You can't buy this item");
     }
-    if (item.price > user.coinsInWallet) {
+    let buyAmount = args.join(' ').toString().match(/([1-9][0-9]*)/)
+    if (!buyAmount) buyAmount=1;
+    else buyAmount = buyAmount[0]
+    if (item.price > user.coinsInWallet || (buyAmount*item.price) > user.coinsInWallet) {
         return message.channel.send("This is so sad, YOU'RE TOO POOR");
     }
     let founditem = user.items.find(x => x.name.toLowerCase() === item.name.toLowerCase());
@@ -21,7 +24,7 @@ module.exports.run = async (bot, message, args) => {
     if (founditem) {
         array.push({
             name: item.name,
-            amount: founditem.amount + 1,
+            amount: (parseInt(founditem.amount) + parseInt(buyAmount)),
             description: item.description
         });
         user.items = array;
@@ -30,14 +33,14 @@ module.exports.run = async (bot, message, args) => {
     else {
         user.items.push({
             name: item.name,
-            amount: 1,
+            amount: buyAmount,
             description: item.description
         });
         await user.save();
     }
-    user.coinsInWallet -= item.price;
+    user.coinsInWallet -= (parseInt(item.price)*parseInt(buyAmount));
     await user.save();
-    message.channel.send(`You bought a **${item.name}**`);
+    message.channel.send(`You bought **${parseInt(buyAmount).toLocaleString()}** \`${item.name}\``);
 }
 
 module.exports.config = {

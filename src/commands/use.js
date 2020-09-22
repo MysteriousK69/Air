@@ -18,7 +18,7 @@ module.exports.run = async (bot, message, args) => {
     if (!founditem) {
         return message.channel.send("you don't have this item");
     }
-
+    
     if (item.keep == false) {
         if (founditem.amount === 1) {
             user.items = [];
