@@ -6,6 +6,7 @@ const array = [{
     displayOnShop: true,
     sellAmount: 10,
     price: 30,
+    keep: false,
     run: async (bot, message, args) => {
         const brownieRandom = [
             'You ate a brownie, and the taste of the chocolate watered in your mouth.',
@@ -24,6 +25,7 @@ const array = [{
     displayOnShop: true,
     sellAmount: 2000,
     price: 5000,
+    keep: true,
     run: async(bot, message, args) => {
 
     }

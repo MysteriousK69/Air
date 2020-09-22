@@ -18,18 +18,21 @@ module.exports.run = async (bot, message, args) => {
     if (!founditem) {
         return message.channel.send("you don't have this item");
     }
-    if (founditem.amount === 1) {
-        user.items = [];
-        await user.save();
-    }
-    else {
-        array.push({
-            name: item.name,
-            amount: founditem.amount - 1,
-            description: item.description
-        });
-        user.items = array;
-        await user.save();
+
+    if (item.keep == false) {
+        if (founditem.amount === 1) {
+            user.items = [];
+            await user.save();
+        }
+        else {
+            array.push({
+                name: item.name,
+                amount: founditem.amount - 1,
+                description: item.description
+            });
+            user.items = array;
+            await user.save();
+        }
     }
     await item.run(bot, message, args);
 }
