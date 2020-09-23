@@ -1,9 +1,9 @@
 const Discord = require('discord.js');
 const prettyMilliseconds = require('pretty-ms');
-
+const prefix = 'air'
 module.exports = async (bot, message) => {
     if (message.author.bot || message.channel.type === 'dm') return;
-    if (message.content.startsWith('air')) {
+    if (message.content.toLowerCase().startsWith(prefix.toLowerCase())) {
         const messageArray = message.content.split(' ');
         const cmd = messageArray[1];
         const args = messageArray.slice(2);
