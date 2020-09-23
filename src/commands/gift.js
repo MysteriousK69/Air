@@ -31,17 +31,17 @@ module.exports.run = async (bot, message, args) => {
     let userArray = userData.items.filter(i => i.name.toLowerCase() !== authoItem.name.toLowerCase());
 
     if (!userItem) {
-        userArray.push({ name: itemToGive.name.toLowerCase(), amount: parseInt(giveAmount), description: itemToGive.description});
+        userArray.push({ name: itemToGive.name.toString(), amount: parseInt(giveAmount), description: itemToGive.description});
         userData.items = userArray;
     } else {
-        userArray.push({ name: itemToGive.name.toLowerCase(), amount: (parseInt(userItem.amount) + parseInt(giveAmount)), description: itemToGive.description});
+        userArray.push({ name: itemToGive.name.toString(), amount: (parseInt(userItem.amount) + parseInt(giveAmount)), description: itemToGive.description});
         userData.items = userArray;
     }
     await userData.save();
     if ((authoItem.amount-parseInt(giveAmount)) == 0) {
         authoData.items = authorArray;
     } else {
-        authorArray.push({ name: itemToGive.name.toLowerCase(), amount: (parseInt(authoItem.amount) - parseInt(giveAmount)), description: itemToGive.description});
+        authorArray.push({ name: itemToGive.name.toString(), amount: (parseInt(authoItem.amount) - parseInt(giveAmount)), description: itemToGive.description});
         authoData.items = authorArray;
     }
     await authoData.save();
