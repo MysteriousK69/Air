@@ -68,6 +68,21 @@ const array = [{
     run: async (bot, message, args) => {
 
     }
+},
+{
+    name: 'Bank Card',
+    description: 'Get more bank space.',
+    canUse: true,
+    canBuy: true,
+    displayOnShop: true,
+    sellAmount: 6667,
+    price: 20000,
+    keep: false,
+    run: async (bot, message, args) => {
+        const random = Math.ceil((Math.random() * 5000) + 5000);
+        const e = await bot.giveBankSpace(message.author.id, random);
+        message.channel.send(`You get a new bank card, which increases your bank space by **${random.toLocaleString()}**. You now have **${e.bankSpace.toLocaleString()}** bank space.`);
+    }
 }
 ];
 
