@@ -11,10 +11,10 @@ module.exports.run = async (bot, message, args) => {
         let items = bot.items.list().filter(x => x.canBuy === true);
         items = items.slice(amount - 5, amount);
         items = items.map(x => `**${x.name}** -- __${x.price.toLocaleString()} coins__\n${x.description}`);
-        if (items.length <= 5) page = 1;
-        else if (items.length <= 10) page = 2;
-        else if (items.length <= 15) page = 3;
-        else if (items.length <= 20) page = 4;
+        if (itemss.length <= 5) page = 1;
+        else if (itemss.length <= 10) page = 2;
+        else if (itemss.length <= 15) page = 3;
+        else if (itemss.length <= 20) page = 4;
         const shopEmbed = new MessageEmbed()
             .setTitle('Air Shop')
             .setDescription(`${items.join('\n\n')}`)
