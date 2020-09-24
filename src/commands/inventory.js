@@ -2,13 +2,19 @@ const { MessageEmbed } = require('discord.js');
 
 module.exports.run = async (bot, message, args) => {
     const user = await bot.fetchUser(message.author.id);
-    if (user.items.length < 1) {
+    let number = 5 * parseInt(args[0]);
+    if (!args[0]) {
+        number = 5;
+    }
+    let item = user.items.slice(number - 5, number);
+    if (item.length < 1) {
         return message.channel.send('You have no items.');
     }
-    const items = user.items.map(x => `**${x.name}** - ${x.amount.toLocaleString()}\n${x.description}`);
+    const items = item.map(x => `**${x.name}** - ${x.amount.toLocaleString()}\n${x.description}`);
     const embed = new MessageEmbed()
         .setTitle(`${message.author.username}'s Inventory`)
         .setDescription(`${items.join('\n\n')}`)
+        .setFooter(`Page ${args[0]}`)
         .setColor('RANDOM');
     message.channel.send(embed);
 }
