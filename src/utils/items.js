@@ -108,7 +108,7 @@ const array = [{
     keep: false,
     run: async (bot, message, args) => {
         let answers = [
-            'You ate rice and gained 50 IQ',
+            'You ate rice and gained 50 IQ',  
             'You ate alot of rice and became an EPIC gamer',
             'You ate rice i suggest eating more',
             'You ate too much rice, stop it get some help'
