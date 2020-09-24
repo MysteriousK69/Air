@@ -19,7 +19,7 @@ module.exports.run = async (bot, message, args) => {
             .setTitle('Air Shop')
             .setDescription(`${items.join('\n\n')}`)
             .setColor('RANDOM')
-            .setFooter(`Page ${args[0]} of ${page}`);
+            .setFooter(`Page ${args[0] || 1} of ${page}`);
         message.channel.send(shopEmbed);
     } else {
         const item = itemss.find(x => x.name.toLowerCase() === args.join(' ').toString().toLowerCase());
