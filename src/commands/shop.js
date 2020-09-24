@@ -23,7 +23,7 @@ module.exports.run = async (bot, message, args) => {
         }
         const embed = new MessageEmbed()
             .setTitle(item.name)
-            .setDescription(`${item.description}\n\n**Price**: ${e}\n**Sell Amount**: **${item.sellAmount}** coins`)
+            .setDescription(`${item.description}\n\n**Price**: ${e}\n**Sell Amount**: **${item.sellAmount.toLocaleString()}** coins`)
             .setColor('RANDOM');
         message.channel.send(embed);
     }

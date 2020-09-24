@@ -8,9 +8,20 @@ module.exports.run = async (bot, message, args) => {
     if (robbedUser.coinsInWallet < 201) {
         return message.channel.send("This user doesn't have much coins, I wouldn't rob them");
     }
-    const random = Math.floor(Math.random() * 5);
-    if (random === 3) {
-        return message.channel.send(`You tried to rob **${member.user.tag}** but got caught! Better luck next time.`);
+    if (user.items.find(x => x.name == 'Lucky Clover')) {
+        const newInv = user.items.filter(i => i.name != 'Lucky Clover');
+        const bypass = user.items.find(i => i.name == 'Lucky Clover');
+        if (bypass.amount == 1) {
+            user.items = newInv;
+        } else {
+            newInv.push({ name: 'Lucky Clover', amount: bypass.amount - 1, description: bypass.description });
+            user.items = newInv
+        }
+    } else {
+        const random = Math.floor(Math.random() * 5);
+        if (random === 3) {
+            return message.channel.send(`You tried to rob **${member.user.tag}** but got caught! Better luck next time.`);
+        }
     }
     let array = robbedUser.items.filter(x => x.name !== 'Wallet Lock');
     const walletLock = robbedUser.items.find(x => x.name === 'Wallet Lock');
@@ -28,7 +39,7 @@ module.exports.run = async (bot, message, args) => {
                 description: walletLock.description
             });
             robbedUser.items = array;
-            await robbedUser.save();   
+            await robbedUser.save();
             return;
         }
     }
@@ -38,6 +49,7 @@ module.exports.run = async (bot, message, args) => {
     await user.save();
     await robbedUser.save();
     message.channel.send(`:moneybag: You stole **${randomAmount.toLocaleString()}** coins from ${member}!`);
+
 }
 
 module.exports.config = {

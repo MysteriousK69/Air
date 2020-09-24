@@ -6,7 +6,7 @@ module.exports.run = async (bot, message, args) => {
     const embed = new MessageEmbed()
         .setTitle(`${member.user.username}'s Balance`)
         .setDescription(`**Wallet**: ${user.coinsInWallet.toLocaleString()}
-        **Bank**: ${user.coinsInBank.toLocaleString()}/${user.bankSpace}
+        **Bank**: ${user.coinsInBank.toLocaleString()}/${user.bankSpace.toLocaleString()}
         **Total**: ${(user.coinsInWallet + user.coinsInBank).toLocaleString()}`)
         .setColor('RANDOM');
     message.channel.send(embed);

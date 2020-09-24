@@ -83,6 +83,19 @@ const array = [{
         const e = await bot.giveBankSpace(message.author.id, random);
         message.channel.send(`You get a new bank card, which increases your bank space by **${random.toLocaleString()}**. You now have **${e.bankSpace.toLocaleString()}** bank space.`);
     }
+},
+{
+    name: 'Lucky Clover',
+    description: 'Increase your chances of successful robbery',
+    canUse: false,
+    canBuy: true,
+    displayOnShop: true,
+    sellAmount: 4000,
+    price: 15000,
+    keep: false,
+    run: async (bot, message, args) => {
+
+    }
 }
 ];
 
