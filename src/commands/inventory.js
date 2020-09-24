@@ -3,6 +3,11 @@ const { MessageEmbed } = require('discord.js');
 module.exports.run = async (bot, message, args) => {
     const user = await bot.fetchUser(message.author.id);
     let number = 5 * parseInt(args[0]);
+    let page;
+    if (user.items.length <= 5) page = 1;
+    else if (user.items.length <= 10) page = 2;
+    else if (user.items.length <= 15) page = 3;
+    else if (user.items.length <= 20) page = 4;
     if (!args[0]) {
         number = 5;
     }
@@ -14,7 +19,7 @@ module.exports.run = async (bot, message, args) => {
     const embed = new MessageEmbed()
         .setTitle(`${message.author.username}'s Inventory`)
         .setDescription(`${items.join('\n\n')}`)
-        .setFooter(`Page ${args[0]}`)
+        .setFooter(`Page ${args[0] || 1} of ${page}`)
         .setColor('RANDOM');
     message.channel.send(embed);
 }
