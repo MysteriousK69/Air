@@ -40,18 +40,18 @@ const array = [{
     price: 10000,
     keep: true,
     run: async (bot, message, args) => {
-        const logsAmount = Math.round(Math.random() * 1)+1;
+        const logsAmount = Math.round(Math.random() * 1) + 1;
         const data = await bot.fetchUser(message.author.id);
         message.channel.send(`You swing your axe and chopped **${logsAmount}** logs`);
         const findItem = data.items.find(i => i.name.toLowerCase() == 'log');
         let userInv = data.items.filter(i => i.name.toLowerCase() !== 'log');
         if (findItem) {
-            userInv.push({ name: 'Log', amount: (findItem.amount+logsAmount), description: 'Sell logs to make money.'});
-            data.items=userInv;
+            userInv.push({ name: 'Log', amount: (findItem.amount + logsAmount), description: 'Sell logs to make money.' });
+            data.items = userInv;
             await data.save();
         } else {
-            userInv.push({ name: 'Log', amount: logsAmount, description: 'Sell logs to make money.'});
-            data.items=userInv;
+            userInv.push({ name: 'Log', amount: logsAmount, description: 'Sell logs to make money.' });
+            data.items = userInv;
             await data.save();
         }
     }
@@ -95,6 +95,26 @@ const array = [{
     keep: false,
     run: async (bot, message, args) => {
 
+    }
+},
+{
+    name: 'Rice',
+    description: 'Eat rice because its best!',
+    canUse: true,
+    canBuy: true,
+    displayOnShop: true,
+    sellAmount: 20,
+    price: 45,
+    keep: false,
+    run: async (bot, message, args) => {
+        let answers = [
+            'You ate rice and gained 50 IQ',
+            'You ate alot of rice and became an EPIC gamer',
+            'You ate rice i suggest eating more',
+            'You ate too much rice, stop it get some help'
+        ];
+        let randomAnswer = Math.floor(Math.random() * answers.length);
+        message.channel.send(answers[randomAnswer])
     }
 }
 ];
