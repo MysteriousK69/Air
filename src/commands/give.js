@@ -14,7 +14,8 @@ module.exports.run = async (bot, message, args) => {
     }
     const userData = await bot.fetchUser(member.user.id);
     const authorData = await bot.fetchUser(message.author.id);
- 
+    if (authorData.passive == true) return message.channel.send(`You're in passive mode, turn it off to give others coins`);
+    if (userData.passive == true) return message.channel.send(`That user is in passive mode, they can't recive any coins`);
     if (args[1] == 'all') {
         const toGive = authorData.coinsInWallet;
 
