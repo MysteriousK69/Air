@@ -1,8 +1,11 @@
 const { MessageEmbed } = require('discord.js');
 
 module.exports.run = async (bot, message, args) => {
+
     let array = [];
+
     const members = message.guild.members.cache.filter(member => !member.user.bot);
+
     for(const member of members.array()) {
         const user = await bot.fetchUser(member.user.id);
         array.push({
@@ -10,15 +13,23 @@ module.exports.run = async (bot, message, args) => {
             coins: user.coinsInWallet ? user.coinsInWallet : 0
         });
     }
+
+    const emojis = [':first_place:', ':second_place:', ':third_place:'];
+
     array = array.filter(user => user.coins > 0);
+
     if (array.length < 1) {
         return message.channel.send('No rich people in this server lmao');
     }
+
     array = array.sort((a, b) => {
         return b.coins - a.coins
     });
+
     array = array.slice(0, 6);
-    array = array.map(x => `🔹 **${x.coins.toLocaleString()}** - ${x.tag}`);
+
+    array = array.map((x, i) => `${emojis[i] || '🔹'} **${x.coins.toLocaleString()}** - ${x.tag}`);
+
     const embed = new MessageEmbed()
         .setAuthor(`Richest people in ${message.guild.name}`)
         .setDescription(`${array.join('\n')}`)
