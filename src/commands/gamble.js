@@ -9,7 +9,10 @@ module.exports.run = async (bot, message, args) => {
     if (!betAmount || isNaN(betAmount) && betAmount !== 'all' && betAmount !== 'max') return message.channel.send(`So how much coins are you gambling again?`);
     if (betAmount < 200) return message.channel.send(`Sorry bud, you can only gamble \`200+\` coins`)
     if (betAmount == 'all' || betAmount == 'max') betAmount=userData.coinsInWallet;
-    else betAmount=parseInt(args[0])
+    else betAmount=parseInt(args[0]);
+    if (betAmount > userData.coinsInWallet) {
+        return message.channel.send("You don't have that much coins lol");
+    }
     if (botRoll < userChoice) {
         const wonCoins = (betAmount + (betAmount * (result / 10)));
         userData.coinsInWallet += parseInt(wonCoins);
