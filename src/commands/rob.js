@@ -1,11 +1,11 @@
 module.exports.run = async (bot, message, args) => {
+    const user = await bot.fetchUser(message.author.id);
+    if (user.passive == true) return message.channel.send(`You're in passive mode, turn that off to rob others`);
     const member = message.mentions.members.first() || message.guild.members.cache.get(args.join(' ')) || message.guild.members.cache.find(member => member.user.username.toLowerCase() === args.join(' ').toString().toLowerCase());
     if (!member) {
         return message.channel.send("You think you can rob nobody?");
     }
-    const user = await bot.fetchUser(message.author.id);
     const robbedUser = await bot.fetchUser(member.id);
-    if (user.passive == true) return message.channel.send(`You're in passive mode, turn that off to rob others`);
     if (robbedUser.passive == true) return message.channel.send(`Leave them alone... they are in passive mode`);
     if (robbedUser.coinsInWallet < 201) {
         return message.channel.send("This user doesn't have much coins, I wouldn't rob them");
