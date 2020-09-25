@@ -11,7 +11,8 @@ const EconomySchema = new mongoose.Schema({
         cooldown: { type: Date, default: new Date(Date.now() - 3600000) },
     },
     items: { type: Array, required: false, default: [] },
-    dailyStreak: { type: Date, required: false, default: new Date(Date.now() - 86400000) }
+    dailyStreak: { type: Date, required: false, default: new Date(Date.now() - 86400000) },
+    passive: { type: Boolean, required: false, default: false }
 });
 
 module.exports = mongoose.model('economy', EconomySchema);
